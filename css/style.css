@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+	margin : 0;
+	padding : 0;
+	font-family: Kode Mono, sans-serif;
+	box-sizing: border-box;
+}
+
+body{
+	display : grid;
+	margin : 0;
+	grid-template-columns: 200px 300px 1fr;
+	height : 100%;
+	gap : 5px;
+}
+.navbar {
+	border : 1px solid #444444;
+	border-radius : 0 5px 5px 0;
+	height : 100vh;
+	border-left : none;
+	background: #2e3035;
+	color : #CCCCCC;
+	padding : 10px;
+}
+
+#nav-books {
+	/* caratteristiche navbar */
+	}
