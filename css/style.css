@@ -7,12 +7,18 @@
 	box-sizing: border-box;
 }
 
+.bxs-edit {
+	font-size: 30px;
+}
+
 body{
+	background : #000000;
 	display : grid;
 	margin : 0;
 	grid-template-columns: 200px 300px 1fr;
 	height : 100%;
 	gap : 5px;
+
 }
 .navbar {
 	border : 1px solid #444444;
@@ -25,5 +31,31 @@ body{
 }
 
 #nav-books {
-	/* caratteristiche navbar */
-	}
+	display:flex;
+	flex-direction: column;
+	gap :20px;
+}
+
+#nav-books>p {
+	display:flex;
+	align-items: center;
+	gap : 10px;
+}
+
+#nav-notes {
+}
+
+#container-notes {
+	display : flex;
+	flex-direction: column;	
+	background : #2e3035;
+	border-radius : 0 5px 5px 0;
+	padding : 10px;
+}
+
+#titolo-nota {
+	
+}
+#nota {
+	color : #CCC;
+}
