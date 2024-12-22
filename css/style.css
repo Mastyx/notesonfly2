@@ -29,6 +29,10 @@ body{
 	color : #CCCCCC;
 	padding : 10px;
 }
+ol {
+	list-style-type : decimal;
+	padding-left : 20px;
+}
 
 #nav-books {
 	display:flex;
@@ -51,7 +55,6 @@ body{
 	background : #2e3035;
 	border-radius : 0 5px 5px 0;
 	padding : 10px;
-	border: 1px solid #CCCCCC;
 }
 
 #titolo-nota {
