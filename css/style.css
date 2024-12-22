@@ -51,6 +51,7 @@ body{
 	background : #2e3035;
 	border-radius : 0 5px 5px 0;
 	padding : 10px;
+	border: 1px solid #CCCCCC;
 }
 
 #titolo-nota {
