@@ -1,20 +1,38 @@
 import Nota from "./Nota.js";
 import Notebook from "./Notebook.js";
 
+const books  = [];
+const notes = [];
+
+// elementi dom
+const addBook = document.getElementById("add-book");
+const sezioneBooks = document.getElementById("sezione-books");
 
 
-
-
-const book1 = new Notebook('book1');
-
-const nota1 = new Nota("nota1", "nel mezzo del cammin");
-const nota2 = new Nota("nota2", "testo della nota 2");
-
-
-book1.notes.push(nota1);
-book1.notes.push(nota2);
-
-book1.notes.forEach( nota => {
-	console.log(nota.titolo + " | " + nota.testo);
+// all evento caricamento pagina
+document.addEventListener("DOMContentLoaded", ()=>{
+	aggiornaBooks();
 });
+
+addBook.addEventListener("click", ()=>{
+	const nomeNuovoBook = prompt("Inserisci il nome del book");
+	if (nomeNuovoBook) {
+		books.push(new Notebook(nomeNuovoBook));
+		aggiornaBooks();
+	}
+});
+
+const aggiornaBooks = ()=>{
+	sezioneBooks.innerText = "";
+	// aggiorniamo gli elementi della sezione books 
+	books.forEach(book => {
+		const elementobook = document.createElement("li");
+		elementobook.id = "elementobook";
+		elementobook.innerText = book.nome;
+		sezioneBooks.appendChild(elementobook);
+	});
+};
+
+
+
 
