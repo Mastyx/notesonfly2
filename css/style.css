@@ -66,8 +66,28 @@ ol>li {
 	gap : 10px;
 }
 
-#nav-notes {
+#notebook-selezionato {
+	display: flex;
+	justify-content : center;
+	padding : 5px;
+	margin-bottom : 15px;
 }
+
+#aggiungi-nota {
+	display: flex;
+	justify-content : center;
+	padding : 10px;
+	border-radius : 5px;
+	box-shadow : 0 0 5px inset #000000;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+#aggiungi-nota:hover {
+	background : #2e2020;
+}
+
+
 
 #container-notes {
 	display : flex;
@@ -78,7 +98,8 @@ ol>li {
 }
 
 #titolo-nota {
-	
+	font-weight: 700;
+	border-bottom : 1px solid #555555;
 }
 #nota {
 	color : #CCC;
