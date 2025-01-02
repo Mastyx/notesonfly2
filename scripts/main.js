@@ -8,6 +8,11 @@ const notes = [];
 const addBook = document.getElementById("add-book");
 const sezioneBooks = document.getElementById("elenco-notebooks");
 const addNota = document.getElementById("aggiungi-nota");
+const notebookSelezionato = document.getElementById("notebook-selezionato");
+
+
+let selectedBook = null;
+let selectedNota = null;
 
 // all evento caricamento pagina
 document.addEventListener("DOMContentLoaded", ()=>{
@@ -23,28 +28,35 @@ addNota.addEventListener("click", ()=>{
 	nuovaNota();
 });
 
+
+
 //crea nuovo notebooks 
 const nuovoNotebook = ()=> {
 	const nomeNuovoBook = prompt("Inserisci il nome del book");
 	if (nomeNuovoBook) {
 		books.push(new Notebook(nomeNuovoBook));
+		//crea la nota aggiungendola al array books 
 		aggiornaBooks();
 	}
 }
 
 const nuovaNota = ()=> {
-	 
+	
 }
 
 
 const aggiornaBooks = ()=>{
 	sezioneBooks.innerText = "";
-	// aggiorniamo gli elementi della sezione books 
+	// aggiorniamo gli elementi della sezione books
+	// ricreando il menu books
 	books.forEach(book => {
-		const elementobook = document.createElement("li");
-		elementobook.id = "elementobook";
-		elementobook.innerText = book.nome;
-		sezioneBooks.appendChild(elementobook);
+		const li_book = document.createElement("li");
+		li_book.id = "elementobook";
+		li_book.innerText = book.nome;
+		li_book.addEventListener("click", ()=>{
+			notebookSelezionato.textContent = book.nome;
+		});
+		sezioneBooks.appendChild(li_book);
 	});
 };
 

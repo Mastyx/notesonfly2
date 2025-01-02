@@ -71,7 +71,16 @@ ol>li {
 	justify-content : center;
 	padding : 5px;
 	margin-bottom : 15px;
+	font-weight : 700;
+	text-shadow : 0 0 5px #00fafa;
 }
+#elementobook {
+	
+}
+
+
+
+
 
 #aggiungi-nota {
 	display: flex;
