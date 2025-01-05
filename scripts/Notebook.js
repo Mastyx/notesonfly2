@@ -1,8 +1,8 @@
 class Notebook {
-	constructor(nome) {
-		this.nome = nome;
+	constructor(titolo) {
+		this.titolo = titolo;
 		this.notes = []; 
-		console.log(this.nome);
+		console.log(this.titolo);
 	}
 }
 

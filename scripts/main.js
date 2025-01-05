@@ -1,71 +1,84 @@
 import Nota from "./Nota.js";
 import Notebook from "./Notebook.js";
 
-const books  = [];
-const notes = [];
 
-// elementi dom
-const addBook = document.getElementById("add-book");
-const sezioneBooks = document.getElementById("elenco-notebooks");
-const addNota = document.getElementById("aggiungi-nota");
+const elenco_ol_Books = document.getElementById("elenco-notebooks");
+const elenco_ol_Note = document.getElementById("elenco-note");
+const btnAggiungiNotebook = document.getElementById("add-book");
+const btnAggiungiNota = document.getElementById("add-nota");
 const notebookSelezionato = document.getElementById("notebook-selezionato");
+const notaSelezionata = document.getElementById("nota-selezionata");
+const contenutoNota = document.getElementById("contenuto-nota");
 
 
-let selectedBook = null;
+//variabili 
+let books = [];
+let selectedNotebook = null;
 let selectedNota = null;
 
-// all evento caricamento pagina
-document.addEventListener("DOMContentLoaded", ()=>{
-	aggiornaBooks();
+let quill ;
+
+// settaggio del editor quill 
+const setQuillEditor = ()=> {
+	quill = new Quill("#contenuto-nota",{
+		theme : "snow",
+		modules : {
+			toolbar : [
+				["bold", "italic","underline", "strike"],// formattazione
+				["code-block"], // blocco codice
+				[{list: "ordered"}, {list: "bullet"}], // liste  ...
+			],
+		},
+	} );
+}
+
+
+// gestione al caricamento della pagina
+document.addEventListener("DOMContentLoaded", ()=> {
+	// richiamaiamo la funzione per settaggio di quill
+	setQuillEditor();
 });
 
-// gestisce evento click nuovo notebook
-addBook.addEventListener("click", ()=>{
-	nuovoNotebook();
-});
-// aggiungi-nota evento click 
-addNota.addEventListener("click", ()=>{
-	nuovaNota();
-});
 
-
-
-//crea nuovo notebooks 
-const nuovoNotebook = ()=> {
-	const nomeNuovoBook = prompt("Inserisci il nome del book");
-	if (nomeNuovoBook) {
-		books.push(new Notebook(nomeNuovoBook));
-		//crea la nota aggiungendola al array books 
-		aggiornaBooks();
+//crea un nuovo notebook 
+btnAggiungiNotebook.addEventListener("click", ()=>{	
+	const titolo = prompt("Inserisci il nome del Notebook");
+	if (titolo) {
+		books.push(new Notebook(titolo));
+		console.log("NUovo notebook creato : " + titolo);
 	}
-}
+	updateNotebook();
 
-const nuovaNota = ()=> {
+});
+
+// crea una nuova nota 
+btnAggiungiNota.addEventListener("click", ()=>{
+});
+
+
+// aggiornamento della schermata con gli oggetti attivi
+const updateNotebook = ()=> {
+	elenco_ol_Books.innerText = "";
 	
+	books.forEach( (book, index) => {
+		const elemento_book = document.createElement("li");
+		elemento_book.id= "elemento-book";
+		elemento_book.innerText = book.titolo;
+		elemento_book.addEventListener("click", ()=>{
+			selectedNotebook = book;
+			notebookSelezionato.innerText = book.titolo;
+		});
+		const cancella = document.createElement("div");
+		cancella.innerHTML = "<i class='bx bxs-trash'></i>";
+		cancella.id = "cancella-book";
+		cancella.addEventListener("click", ()=>{
+			console.log("Elemento cancellato : " + book.titolo);
+			
+		});
+
+		elemento_book.appendChild(cancella);
+		elenco_ol_Books.appendChild(elemento_book);
+	});
 }
 
 
-const aggiornaBooks = ()=>{
-	sezioneBooks.innerText = "";
-	// aggiorniamo gli elementi della sezione books
-	// ricreando il menu books
-	books.forEach(book => {
-		const li_book = document.createElement("li");
-		li_book.id = "elementobook";
-		li_book.innerText = book.nome;
-		li_book.addEventListener("click", ()=>{
-			notebookSelezionato.textContent = book.nome;
-		});
-		sezioneBooks.appendChild(li_book);
-	});
-};
-
-
-
-// se creiamo una costante che riceve il notebook selezionato 
-// e poi al click della nuova nota 
-// controlliamo se e stato selezionato un notebook 
-// se si 
-// allora aggiungiamo al notebook.notes l'elemento nota 
-//
-// in seguito aggiornomo la vita delle note

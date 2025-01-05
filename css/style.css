@@ -44,8 +44,6 @@ body{
 }
 
 ol {
-	list-style-type : decimal;
-	padding-left : 25px;
 }
 ol>li {
 	padding : 5px;
@@ -75,14 +73,17 @@ ol>li {
 	text-shadow : 0 0 5px #00fafa;
 }
 #elementobook {
-	
+	cursor: pointer;
+}
+#elementobook:hover {
+	background : #2e2020;
 }
 
 
 
 
 
-#aggiungi-nota {
+#add-nota {
 	display: flex;
 	justify-content : center;
 	padding : 10px;
@@ -92,7 +93,7 @@ ol>li {
 	margin-bottom: 10px;
 	cursor: pointer;
 }
-#aggiungi-nota:hover {
+#add-nota:hover {
 	background : #2e2020;
 }
 
@@ -106,10 +107,29 @@ ol>li {
 	padding : 10px;
 }
 
-#titolo-nota {
+#nota-selezionata {
 	font-weight: 700;
 	border-bottom : 1px solid #555555;
 }
-#nota {
+#contenuto-nota {
 	color : #CCC;
+}
+
+#elemento-book{
+	display: flex;
+	justify-content : space-between;
+	align-items : center;
+	cursor : pointer;
+}
+#elemento-book:hover {
+	background: #559955;
+}
+
+#cancella-book {
+	padding : 5px;
+	border : 1px solid #555555;
+	border-radius : 5px;
+}
+#cancella-book:hover {
+	background : #995555;
 }

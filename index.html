@@ -3,6 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Note on fly ver.2.0</title>
+	
+		<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+	<!-- Include your favorite highlight.js stylesheet -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" rel="stylesheet">
+	<!-- Include the highlight.js library -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+
 	<link rel="stylesheet" href="./css/style.css">
 	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -24,7 +33,7 @@
 		<div id="notebook-selezionato">notebook-selezionato</div>
 		<hr>
 		<div id="container-list-notes">
-			<div id="aggiungi-nota">Aggiungi</div>
+			<div id="add-nota">Aggiungi</div>
 			<ol id="elenco-note"></ol>
 		</div>
 	</nav>
@@ -32,8 +41,8 @@
 
 
 	<div class="container" id="container-notes">
-		<div id="titolo-nota">titolo-nota</div>
-		<div id="nota">nota</div>
+		<div id="nota-selezionata">titolo-nota</div>
+		<div id="contenuto-nota">nota</div>
 	</div>
 
 
