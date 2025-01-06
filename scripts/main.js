@@ -24,12 +24,22 @@ const setQuillEditor = ()=> {
 		theme : "snow",
 		modules : {
 			toolbar : [
+				[{size : [] }],
+				[{color : [] }],
+				[{align: [] }],
 				["bold", "italic","underline", "strike"],// formattazione
 				["code-block"], // blocco codice
 				[{list: "ordered"}, {list: "bullet"}], // liste  ...
 			],
 		},
 	} );
+
+	// Imposta altezza fissa e overflow per l'editor
+  const editorContainer = document.querySelector(".ql-editor");
+  editorContainer.style.height = "100%";
+  editorContainer.style.maxHeight = "100%";
+  editorContainer.style.overflowY = "auto";
+  editorContainer.style.overflowX = "hidden";
 }
 
 
@@ -37,6 +47,14 @@ const setQuillEditor = ()=> {
 document.addEventListener("DOMContentLoaded", ()=> {
 	// richiamaiamo la funzione per settaggio di quill
 	setQuillEditor();
+	const datiSalvati = JSON.parse(localStorage.getItem("data-nof2")) || [];
+	books = datiSalvati.map(bookData => {
+		const notebook = new Notebook(bookData.titolo);
+		notebook.notes = bookData.notes.map(notaData => 
+			new Nota(notaData.titolo, notaData.testo));
+			return notebook;
+	});
+	updateNotebook();
 });
 
 
@@ -47,6 +65,7 @@ btnAggiungiNotebook.addEventListener("click", ()=>{
 		books.push(new Notebook(titolo));
 		console.log("NUovo notebook creato : " + titolo);
 	}
+	salvaNotebooks();
 	updateNotebook();
 
 });
@@ -62,6 +81,7 @@ btnAggiungiNota.addEventListener("click", ()=>{
 		const newNota = new Nota(titoloNota, "");
 		selectedNotebook.notes.push(newNota);
 		console.log("Nota Creata nel book : ", selectedNotebook.titolo);
+		salvaNotebooks();
 		updateNote();
 	}
 });
@@ -102,14 +122,27 @@ const updateNote = ()=> {
 		selectedNotebook.notes.forEach((nota, index) => {
 			const elemNota = document.createElement("li");
 			elemNota.textContent = nota.titolo;
+			elemNota.id = "elemento-nota";
 			elemNota.addEventListener("click", ()=> {
 				selectedNota = nota;
 				notaSelezionata.innerText = nota.titolo;
 				quill.enable(true);
 				quill.setContents(nota.testo || "");
 			});
+			const cancella = document.createElement("div");
+			cancella.innerHTML = "<i class='bx bxs-trash'></i>";
+			cancella.id = "cancella-nota";
+			cancella.addEventListener("click", ()=>{
+				console.log("Elemento cancellato : " + book.titolo);
+			});
+			elemNota.appendChild(cancella);
 			elenco_ol_Note.appendChild(elemNota);
 		});
 	}
 }
 
+
+
+const salvaNotebooks = ()=> {
+	localStorage.setItem("data-nof2", JSON.stringify(books));
+}

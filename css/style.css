@@ -16,9 +16,10 @@ body{
 	background : #000000;
 	display : grid;
 	margin : 0;
-	grid-template-columns: 200px 300px 1fr;
+	grid-template-columns: 250px 300px 1fr;
 	height : 100%;
 	gap : 5px;
+	height : 100vh;
 
 }
 .navbar {
@@ -28,7 +29,9 @@ body{
 	border-left : none;
 	background: #2e3035;
 	color : #CCCCCC;
-	padding : 10px;
+	padding : 20px;
+	overflow-y : auto;
+	overflow-x : hidden;
 }
 
 #add-book {
@@ -39,14 +42,14 @@ body{
 	justify-content: center;
 	cursor : pointer;
 	margin-bottom : 10px;
+
 }
 #add-book:hover {
 	background: #2e2020;
 }
 
-ol {
-}
-ol>li {
+
+li {
 	padding : 5px;
 	border : 1px solid #555555;
 	margin-bottom : 5px;
@@ -74,9 +77,6 @@ ol>li {
 	text-shadow : 0 0 5px #00fafa;
 }
 
-
-
-
 #add-nota {
 	display: flex;
 	justify-content : center;
@@ -91,8 +91,6 @@ ol>li {
 	background : #2e2020;
 }
 
-
-
 #container-notes {
 	display : flex;
 	flex-direction: column;	
@@ -106,10 +104,43 @@ ol>li {
 	border-bottom : 1px solid #555555;
 	padding : 10px;
 }
+
 #contenuto-nota {
-	color : #CCC;
+	color : #CCCCCC;
 	border : none;
+	border-radius : 10px;
+	padding : 10px;
+	white-space: pre-wrap;
+	word-wrap : break-word;
+
+	overflow-wrap: break-word;
+	overflow-x : hidden;
+	overflow-y : auto;
+	box-sizing : border-box;
+	resize : none;
+	height : 100%;
+	max-height : 100%;
+
 }
+.container {
+	 display: flex;
+  flex-direction: column;
+  height: 100%; /* Occupa tutta l'altezza */
+  overflow: hidden; /* Evita l'overflow */
+}
+
+.ql-editor {
+	height : 100%;
+	overflow-y : auto;
+	overflow-x : hidden;
+	background : #000000;
+	resize : none;
+}
+.ql-snow {
+	border : none !important;
+	border-bottom : 1px solid #CCCCCC !important;
+}
+
 
 #elemento-book{
 	display: flex;
@@ -128,4 +159,27 @@ ol>li {
 }
 #cancella-book:hover {
 	background : #995555;
+}
+
+#elemento-nota {
+	display:flex;
+	justify-content : space-between;
+	align-items : center;
+	cursor : pointer;
+}
+#elemento-nota:hover {
+	background: #559955;
+}
+#cancella-nota {
+	padding : 5px;
+	border : 1px solid #555555;
+	border-radius : 5px;
+}
+#cancella-nota:hover {
+	background : #995555;
+}
+
+
+.selected {
+	background : #00fa00;
 }
