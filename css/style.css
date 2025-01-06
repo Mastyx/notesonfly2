@@ -5,6 +5,7 @@
 	padding : 0;
 	font-family: Kode Mono, sans-serif;
 	box-sizing: border-box;
+	color : #CCCCCC;
 }
 
 .bxs-edit {
@@ -72,13 +73,6 @@ ol>li {
 	font-weight : 700;
 	text-shadow : 0 0 5px #00fafa;
 }
-#elementobook {
-	cursor: pointer;
-}
-#elementobook:hover {
-	background : #2e2020;
-}
-
 
 
 
@@ -110,9 +104,11 @@ ol>li {
 #nota-selezionata {
 	font-weight: 700;
 	border-bottom : 1px solid #555555;
+	padding : 10px;
 }
 #contenuto-nota {
 	color : #CCC;
+	border : none;
 }
 
 #elemento-book{

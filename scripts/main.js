@@ -53,10 +53,21 @@ btnAggiungiNotebook.addEventListener("click", ()=>{
 
 // crea una nuova nota 
 btnAggiungiNota.addEventListener("click", ()=>{
+	if(!selectedNotebook){
+		alert("Nessun notebook e stato selezionato");
+		return;
+	}
+	const titoloNota = prompt("Inserisci il titolo della nota");
+	if (titoloNota) {
+		const newNota = new Nota(titoloNota, "");
+		selectedNotebook.notes.push(newNota);
+		console.log("Nota Creata nel book : ", selectedNotebook.titolo);
+		updateNote();
+	}
 });
 
 
-// aggiornamento della schermata con gli oggetti attivi
+// aggiornamento gli elementi notebook 
 const updateNotebook = ()=> {
 	elenco_ol_Books.innerText = "";
 	
@@ -67,13 +78,16 @@ const updateNotebook = ()=> {
 		elemento_book.addEventListener("click", ()=>{
 			selectedNotebook = book;
 			notebookSelezionato.innerText = book.titolo;
+			selectedNota = null;
+			notaSelezionata.innerText = "Nessuna Nota Selezionata";
+			contenutoNota.value = "Nessun contenuto";
+			updateNote();
 		});
 		const cancella = document.createElement("div");
 		cancella.innerHTML = "<i class='bx bxs-trash'></i>";
 		cancella.id = "cancella-book";
 		cancella.addEventListener("click", ()=>{
 			console.log("Elemento cancellato : " + book.titolo);
-			
 		});
 
 		elemento_book.appendChild(cancella);
@@ -81,4 +95,21 @@ const updateNotebook = ()=> {
 	});
 }
 
+// aggiorniamo gli elementi note 
+const updateNote = ()=> {
+	elenco_ol_Note.innerText = "";
+	if (selectedNotebook) {
+		selectedNotebook.notes.forEach((nota, index) => {
+			const elemNota = document.createElement("li");
+			elemNota.textContent = nota.titolo;
+			elemNota.addEventListener("click", ()=> {
+				selectedNota = nota;
+				notaSelezionata.innerText = nota.titolo;
+				quill.enable(true);
+				quill.setContents(nota.testo || "");
+			});
+			elenco_ol_Note.appendChild(elemNota);
+		});
+	}
+}
 
