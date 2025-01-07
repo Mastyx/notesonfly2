@@ -133,8 +133,8 @@ li {
 	height : 100%;
 	overflow-y : auto;
 	overflow-x : hidden;
-	background : #000000;
 	resize : none;
+	border-radius : 10px;
 }
 .ql-snow {
 	border : none !important;

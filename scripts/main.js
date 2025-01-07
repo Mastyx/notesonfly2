@@ -40,6 +40,14 @@ const setQuillEditor = ()=> {
   editorContainer.style.maxHeight = "100%";
   editorContainer.style.overflowY = "auto";
   editorContainer.style.overflowX = "hidden";
+	
+	//intercettiamo i cambiamenti del testo per salvarli nel localstorage
+	quill.on("text-change", ()=> {
+		if(selectedNota) {
+			selectedNota.testo = quill.getContents();
+			localStorage.setItem("data-nof2", JSON.stringify(books));
+		}
+	});
 }
 
 
@@ -107,7 +115,8 @@ const updateNotebook = ()=> {
 		cancella.innerHTML = "<i class='bx bxs-trash'></i>";
 		cancella.id = "cancella-book";
 		cancella.addEventListener("click", ()=>{
-			console.log("Elemento cancellato : " + book.titolo);
+			cancellaNotebook(index);
+
 		});
 
 		elemento_book.appendChild(cancella);
@@ -145,4 +154,14 @@ const updateNote = ()=> {
 
 const salvaNotebooks = ()=> {
 	localStorage.setItem("data-nof2", JSON.stringify(books));
+}
+
+const cancellaNotebook = (index)=> {
+	if(selectedNotebook) {
+		if( confirm("Il Book e tutto le note verranno cancellate !!! "))  {
+			books.splice(index, 1);
+			localStorage.setItem("data-nof2", JSON.stringify(books));
+			updateNotebook();
+		}
+	}
 }
