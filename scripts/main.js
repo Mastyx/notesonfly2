@@ -53,8 +53,11 @@ const setQuillEditor = ()=> {
 
 // gestione al caricamento della pagina
 document.addEventListener("DOMContentLoaded", ()=> {
-	// richiamaiamo la funzione per settaggio di quill
 	setQuillEditor();
+	inizializza();
+});
+const inizializza = ()=>{
+	// richiamaiamo la funzione per settaggio di quill
 	const datiSalvati = JSON.parse(localStorage.getItem("data-nof2")) || [];
 	books = datiSalvati.map(bookData => {
 		const notebook = new Notebook(bookData.titolo);
@@ -63,7 +66,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 			return notebook;
 	});
 	updateNotebook();
-});
+}
 
 
 //crea un nuovo notebook 
@@ -97,7 +100,7 @@ btnAggiungiNota.addEventListener("click", ()=>{
 
 // aggiornamento gli elementi notebook 
 const updateNotebook = ()=> {
-	elenco_ol_Books.innerText = "";
+	elenco_ol_Books.innerHTML= "";
 	
 	books.forEach( (book, index) => {
 		const elemento_book = document.createElement("li");
@@ -135,14 +138,16 @@ const updateNote = ()=> {
 			elemNota.addEventListener("click", ()=> {
 				selectedNota = nota;
 				notaSelezionata.innerText = nota.titolo;
-				quill.enable(true);
-				quill.setContents(nota.testo || "");
+				quill.enable( true );
+				quill.setContents( nota.testo || "" );
 			});
 			const cancella = document.createElement("div");
 			cancella.innerHTML = "<i class='bx bxs-trash'></i>";
 			cancella.id = "cancella-nota";
-			cancella.addEventListener("click", ()=>{
-				console.log("Elemento cancellato : " + book.titolo);
+			cancella.addEventListener("click", (e)=>{
+				e.stopPropagation();
+				cancellaNota(index);
+				console.log("Elemento cancellato : " + nota.titolo);
 			});
 			elemNota.appendChild(cancella);
 			elenco_ol_Note.appendChild(elemNota);
@@ -157,11 +162,21 @@ const salvaNotebooks = ()=> {
 }
 
 const cancellaNotebook = (index)=> {
-	if(selectedNotebook) {
-		if( confirm("Il Book e tutto le note verranno cancellate !!! "))  {
-			books.splice(index, 1);
+	if( confirm("Il Book e tutto le note verranno cancellate !!! "))  {
+		books.splice(index, 1);
+		localStorage.setItem("data-nof2", JSON.stringify(books));
+		location.reload();
+	}
+}
+
+const cancellaNota = (index)=> {
+	if (selectedNotebook) {
+		if( confirm("La nota verra cancellata !!!") ) {
+			selectedNotebook.notes.splice(index, 1);
+			selectedNota = null;
+			updateNote();
+			notebookSelezionato.innerText = "e ce cazz ";
 			localStorage.setItem("data-nof2", JSON.stringify(books));
-			updateNotebook();
 		}
 	}
 }
