@@ -20,6 +20,8 @@ let quill ;
 
 // settaggio del editor quill 
 const setQuillEditor = ()=> {
+
+
 	quill = new Quill("#contenuto-nota",{
 		theme : "snow",
 		modules : {
@@ -46,6 +48,7 @@ const setQuillEditor = ()=> {
 		if(selectedNota) {
 			selectedNota.testo = quill.getContents();
 			localStorage.setItem("data-nof2", JSON.stringify(books));
+			getLocalStorageUsage();
 		}
 	});
 }
@@ -55,6 +58,7 @@ const setQuillEditor = ()=> {
 document.addEventListener("DOMContentLoaded", ()=> {
 	setQuillEditor();
 	inizializza();
+	getLocalStorageUsage();
 });
 const inizializza = ()=>{
 	// richiamaiamo la funzione per settaggio di quill
@@ -179,4 +183,27 @@ const cancellaNota = (index)=> {
 			localStorage.setItem("data-nof2", JSON.stringify(books));
 		}
 	}
+}
+
+
+function getLocalStorageUsage() {
+	const MAX_LOCAL_STORAGE = 5 * 1024 * 1024; // 5MB in bytes
+	let usedSpace = 0;
+
+	for (let key in localStorage) {
+			if (localStorage.hasOwnProperty(key)) {
+					usedSpace += (localStorage[key].length + key.length) * 2; // Ogni carattere UTF-16 occupa 2 byte
+			}
+	}
+
+	const usedPercentage = (usedSpace / MAX_LOCAL_STORAGE) * 100;
+	const progressBar = document.getElementById("storage-usage-bar");
+	if (usedPercentage > 80 ) {
+		progressBar.style.backgroundColor = "red";
+	} else {
+		progressBar.style.backgroundColor = "green";
+	}
+	progressBar.value = usedPercentage;
+
+	console.log(`Spazio usato: ${usedSpace} bytes (${usedPercentage.toFixed(2)}%)`);
 }

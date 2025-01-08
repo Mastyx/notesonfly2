@@ -34,6 +34,31 @@ body{
 	overflow-x : hidden;
 }
 
+#storage-usage-bar {
+	width : 100%;
+	height : 10px;
+	margin-top : 5px;
+	border-radius : 3px;
+	overflow : hidden;
+	appearance : none;
+}
+#storage-usage-bar::-webkit-progress-bar {
+    background-color: #444444;
+    border-radius: 5px;
+}
+
+#storage-usage-bar::-webkit-progress-value {
+    background-color: #AA0000;
+    border-radius: 5px;
+}
+
+#storage-usage-bar::-moz-progress-bar {
+    background-color: #AA0000;
+    border-radius: 5px;
+}
+
+
+
 #add-book {
 	padding : 10px;
 	border-radius : 5px;
@@ -135,6 +160,7 @@ li {
 	overflow-x : hidden;
 	resize : none;
 	border-radius : 10px;
+	font-size : 18px;
 }
 .ql-snow {
 	border : none !important;
