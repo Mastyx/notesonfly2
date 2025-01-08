@@ -16,22 +16,36 @@ body{
 	background : #000000;
 	display : grid;
 	margin : 0;
-	grid-template-columns: 250px 300px 1fr;
+	grid-template-columns: 180px 200px 1fr;
 	height : 100%;
 	gap : 5px;
 	height : 100vh;
 
+}
+
+#option {
+	display: flex;
+	justify-content:center;
+	align-items : center;
+	gap:5px;
+}
+#import, #export {
+	border : 1px solid #555555;
+	border-radius : 5px;
+	padding : 5px;
 }
 .navbar {
 	border : 1px solid #444444;
 	border-radius : 0 5px 5px 0;
 	height : 100vh;
 	border-left : none;
-	background: #2e3035;
+	background: #282d40;
 	color : #CCCCCC;
-	padding : 20px;
+	padding : 5px;
 	overflow-y : auto;
 	overflow-x : hidden;
+	font-family : Ubuntu Mono, sans-serif;
+	font-size : 12px;
 }
 
 #storage-usage-bar {
@@ -62,7 +76,7 @@ body{
 #add-book {
 	padding : 10px;
 	border-radius : 5px;
-	box-shadow: 0 0 5px inset #000000;
+	box-shadow: 0 0 2px inset #000000;
 	display : flex;
 	justify-content: center;
 	cursor : pointer;
@@ -70,7 +84,7 @@ body{
 
 }
 #add-book:hover {
-	background: #2e2020;
+	background: #555555;
 }
 
 
@@ -99,7 +113,8 @@ li {
 	padding : 5px;
 	margin-bottom : 15px;
 	font-weight : 700;
-	text-shadow : 0 0 5px #00fafa;
+	border : 1px solid #555555;
+	border-radius : 5px;
 }
 
 #add-nota {
@@ -107,27 +122,32 @@ li {
 	justify-content : center;
 	padding : 10px;
 	border-radius : 5px;
-	box-shadow : 0 0 5px inset #000000;
+	box-shadow : 0 0 2px inset #000000;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	cursor: pointer;
 }
 #add-nota:hover {
-	background : #2e2020;
+	background : #555555;
 }
 
 #container-notes {
 	display : flex;
 	flex-direction: column;	
-	background : #2e3035;
+	background : #161824;
 	border-radius : 0 5px 5px 0;
 	padding : 10px;
 }
 
 #nota-selezionata {
 	font-weight: 700;
-	border-bottom : 1px solid #555555;
+	border : 1px solid #555555;
 	padding : 10px;
+	display : flex; 
+	justify-content : left;
+	align-items : center;
+	border-radius : 5px;
+
 }
 
 #contenuto-nota {

@@ -9,7 +9,8 @@ const btnAggiungiNota = document.getElementById("add-nota");
 const notebookSelezionato = document.getElementById("notebook-selezionato");
 const notaSelezionata = document.getElementById("nota-selezionata");
 const contenutoNota = document.getElementById("contenuto-nota");
-
+const exportBtn = document.getElementById("export");
+const importBtn = document.getElementById("import")
 
 //variabili 
 let books = [];
@@ -142,6 +143,7 @@ const updateNote = ()=> {
 			elemNota.addEventListener("click", ()=> {
 				selectedNota = nota;
 				notaSelezionata.innerText = nota.titolo;
+				notebookSelezionato.innerText = selectedNotebook.titolo;
 				quill.enable( true );
 				quill.setContents( nota.testo || "" );
 			});
@@ -158,7 +160,6 @@ const updateNote = ()=> {
 		});
 	}
 }
-
 
 
 const salvaNotebooks = ()=> {
@@ -179,7 +180,8 @@ const cancellaNota = (index)=> {
 			selectedNotebook.notes.splice(index, 1);
 			selectedNota = null;
 			updateNote();
-			notebookSelezionato.innerText = "e ce cazz ";
+			notebookSelezionato.innerText = " - - - ";
+			notaSelezionata.innerText = " - - - ";
 			localStorage.setItem("data-nof2", JSON.stringify(books));
 		}
 	}
@@ -207,3 +209,47 @@ function getLocalStorageUsage() {
 
 	console.log(`Spazio usato: ${usedSpace} bytes (${usedPercentage.toFixed(2)}%)`);
 }
+
+exportBtn.addEventListener("click", ()=> {
+	exportLocalStorage();
+});
+
+const exportLocalStorage = ()=> {
+	const data = {...localStorage };
+
+	const json = JSON.stringify(data, null, 2);
+	const blob = new Blob([json], {type:"application/json"});
+	
+	const url = URL.createObjectURL(blob);
+	const a = document.createElement("a");
+	a.href = url;
+	a.download = "data-nof2.json";
+	a.click();
+	URL.revokeObjectURL(url);
+}
+
+importBtn.addEventListener("click", ()=>{
+	importFileData();
+})
+
+const importFileData = (event)=> {
+	const file = event.target.files[0];
+	const reader = new FileReader();
+
+	reader.onload = (e) => {
+		try {
+			const data = JSON.parse(e.target.result);
+			for (const [key, value] of Object.entries(data)) {
+				localStorage.setItem(key, value);
+			}
+			alert("Dati importti con succeso !!!");
+			location.reload();
+		} catch (err) {
+			console.log("errore caricamento file...");
+			alert("Errore caricamento file");
+		}
+	};
+	reader.readAsText(file);
+
+}
+
