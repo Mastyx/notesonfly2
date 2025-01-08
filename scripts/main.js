@@ -228,7 +228,7 @@ const exportLocalStorage = ()=> {
 	URL.revokeObjectURL(url);
 }
 
-importBtn.addEventListener("click", ()=>{
+importBtn.addEventListener("change", ()=>{
 	importFileData();
 })
 
