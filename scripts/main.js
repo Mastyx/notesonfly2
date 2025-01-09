@@ -11,7 +11,7 @@ const notaSelezionata = document.getElementById("nota-selezionata");
 const contenutoNota = document.getElementById("contenuto-nota");
 const exportBtn = document.getElementById("export");
 const importBtn = document.getElementById("import")
-
+const fileInput = document.getElementById("file-import");
 //variabili 
 let books = [];
 let selectedNotebook = null;
@@ -215,10 +215,9 @@ exportBtn.addEventListener("click", ()=> {
 });
 
 const exportLocalStorage = ()=> {
-	const data = {...localStorage };
 
-	const json = JSON.stringify(data, null, 2);
-	const blob = new Blob([json], {type:"application/json"});
+	const data = JSON.stringify(books, null, 2);
+	const blob = new Blob([data], {type:"application/json"});
 	
 	const url = URL.createObjectURL(blob);
 	const a = document.createElement("a");
@@ -228,28 +227,35 @@ const exportLocalStorage = ()=> {
 	URL.revokeObjectURL(url);
 }
 
-importBtn.addEventListener("change", ()=>{
-	importFileData();
-})
-
-const importFileData = (event)=> {
+importBtn.addEventListener("click", ()=>{
+	fileInput.click();
+});
+fileInput.addEventListener("change", (event)=>{
 	const file = event.target.files[0];
-	const reader = new FileReader();
-
-	reader.onload = (e) => {
-		try {
-			const data = JSON.parse(e.target.result);
-			for (const [key, value] of Object.entries(data)) {
-				localStorage.setItem(key, value);
-			}
-			alert("Dati importti con succeso !!!");
-			location.reload();
-		} catch (err) {
-			console.log("errore caricamento file...");
-			alert("Errore caricamento file");
-		}
-	};
-	reader.readAsText(file);
-
-}
+	if (file) {
+			const reader = new FileReader();
+			reader.onload = (e) => {
+					try {
+							const data = JSON.parse(e.target.result); // Leggi il file JSON
+							
+							if (Array.isArray(data)) {
+									books = data; // Sovrascrivi il tuo array `books` con i dati importati
+									selectedNotebook = null; // Resetta il notebook selezionato
+									selectedNota = null; // Resetta la nota selezionata
+									notebookSelezionato.innerText = "Nessun Notebook Selezionato";
+									notaSelezionata.innerText = "Nessuna Nota Selezionata";
+									quill.setText(""); // Pulisci l'editor Quill
+									updateNotebook(); // Aggiorna la UI
+									elenco_ol_Note.innerText = "";
+							} else {
+									alert("Il file non contiene dati validi.");
+							}
+					} catch (err) {
+							console.error("Errore durante l'importazione del file:", err);
+							alert("Errore nel file JSON selezionato.");
+					}
+			};
+			reader.readAsText(file);
+	}
+});
 
