@@ -33,6 +33,10 @@ body{
 	border : 1px solid #555555;
 	border-radius : 5px;
 	padding : 5px;
+	cursor : pointer;
+}
+#import:hover, #export:hover {
+	background : #555555;
 }
 .navbar {
 	border : 1px solid #444444;

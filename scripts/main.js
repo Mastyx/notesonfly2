@@ -215,6 +215,11 @@ exportBtn.addEventListener("click", ()=> {
 });
 
 const exportLocalStorage = ()=> {
+	const fileName = prompt("Dai un nome al file (senza estensione) : ");
+	if(!fileName) {
+		alert("Salvataggio annullato, nome non fornito");
+		return;
+	}
 
 	const data = JSON.stringify(books, null, 2);
 	const blob = new Blob([data], {type:"application/json"});
@@ -222,7 +227,7 @@ const exportLocalStorage = ()=> {
 	const url = URL.createObjectURL(blob);
 	const a = document.createElement("a");
 	a.href = url;
-	a.download = "data-nof2.json";
+	a.download = `${fileName}.json`;
 	a.click();
 	URL.revokeObjectURL(url);
 }
