@@ -111,6 +111,10 @@ const updateNotebook = ()=> {
 		elemento_book.id= "elemento-book";
 		elemento_book.innerText = book.titolo;
 		elemento_book.addEventListener("click", ()=>{
+			document.querySelectorAll("#elenco-notebooks li").forEach((el)=> {
+				el.classList.remove("selected");
+			});
+			elemento_book.classList.add("selected");
 			selectedNotebook = book;
 			notebookSelezionato.innerText = book.titolo;
 			selectedNota = null;
@@ -138,6 +142,10 @@ const updateNote = ()=> {
 			elemNota.textContent = nota.titolo;
 			elemNota.id = "elemento-nota";
 			elemNota.addEventListener("click", ()=> {
+				document.querySelectorAll("#elenco-note li").forEach((el)=>{
+					el.classList.remove("selected");
+				});
+				elemNota.classList.add("selected");
 				selectedNota = nota;
 				notaSelezionata.innerText = nota.titolo;
 				notebookSelezionato.innerText = selectedNotebook.titolo;

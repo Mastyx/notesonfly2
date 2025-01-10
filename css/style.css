@@ -232,5 +232,5 @@ li {
 
 
 .selected {
-	background : #00fa00;
+	background : linear-gradient(#282d40, #006A87);
 }
