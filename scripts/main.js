@@ -18,14 +18,21 @@ let selectedNotebook = null;
 let selectedNota = null;
 
 let quill ;
+// gestione al caricamento della pagina
+document.addEventListener("DOMContentLoaded", ()=> {
+	hljs.configure({ languages: ["javascript", "python", "html", "css"] }); // Specifica i linguaggi supportati (opzionale)
+  hljs.highlightAll(); // Inizializza highlight.js
+	setQuillEditor();
+	inizializza();
+	getLocalStorageUsage();
+});
 
 // settaggio del editor quill 
 const setQuillEditor = ()=> {
-
-
 	quill = new Quill("#contenuto-nota",{
 		theme : "snow",
 		modules : {
+			syntax : true,
 			toolbar : [
 				[{size : [] }],
 				[{color : [] }],
@@ -35,7 +42,7 @@ const setQuillEditor = ()=> {
 				[{list: "ordered"}, {list: "bullet"}], // liste  ...
 			],
 		},
-	} );
+	});
 
 	// Imposta altezza fissa e overflow per l'editor
   const editorContainer = document.querySelector(".ql-editor");
@@ -55,12 +62,6 @@ const setQuillEditor = ()=> {
 }
 
 
-// gestione al caricamento della pagina
-document.addEventListener("DOMContentLoaded", ()=> {
-	setQuillEditor();
-	inizializza();
-	getLocalStorageUsage();
-});
 const inizializza = ()=>{
 	// richiamaiamo la funzione per settaggio di quill
 	const datiSalvati = JSON.parse(localStorage.getItem("data-nof2")) || [];
@@ -83,7 +84,6 @@ btnAggiungiNotebook.addEventListener("click", ()=>{
 	}
 	salvaNotebooks();
 	updateNotebook();
-
 });
 
 // crea una nuova nota 
@@ -106,7 +106,6 @@ btnAggiungiNota.addEventListener("click", ()=>{
 // aggiornamento gli elementi notebook 
 const updateNotebook = ()=> {
 	elenco_ol_Books.innerHTML= "";
-	
 	books.forEach( (book, index) => {
 		const elemento_book = document.createElement("li");
 		elemento_book.id= "elemento-book";
@@ -124,9 +123,7 @@ const updateNotebook = ()=> {
 		cancella.id = "cancella-book";
 		cancella.addEventListener("click", ()=>{
 			cancellaNotebook(index);
-
 		});
-
 		elemento_book.appendChild(cancella);
 		elenco_ol_Books.appendChild(elemento_book);
 	});
@@ -189,6 +186,7 @@ const cancellaNota = (index)=> {
 
 
 function getLocalStorageUsage() {
+	// calcola la percentuale rimasta libera di 5MB  
 	const MAX_LOCAL_STORAGE = 5 * 1024 * 1024; // 5MB in bytes
 	let usedSpace = 0;
 
@@ -210,11 +208,13 @@ function getLocalStorageUsage() {
 	console.log(`Spazio usato: ${usedSpace} bytes (${usedPercentage.toFixed(2)}%)`);
 }
 
+
+//intercetta il click sul div export 
 exportBtn.addEventListener("click", ()=> {
 	exportLocalStorage();
 });
-
 const exportLocalStorage = ()=> {
+	// scarica tutte i notebook e le note in un file json
 	const fileName = prompt("Dai un nome al file (senza estensione) : ");
 	if(!fileName) {
 		alert("Salvataggio annullato, nome non fornito");
@@ -232,10 +232,15 @@ const exportLocalStorage = ()=> {
 	URL.revokeObjectURL(url);
 }
 
+
+// intercetta il click sul div import 
 importBtn.addEventListener("click", ()=>{
-	fileInput.click();
+	// simula il click su fileInput per 
+	// richiamare la finestra di input 
+	fileInput.click(); 
 });
 fileInput.addEventListener("change", (event)=>{
+	// carica il file json
 	const file = event.target.files[0];
 	if (file) {
 			const reader = new FileReader();

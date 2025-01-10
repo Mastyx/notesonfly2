@@ -94,9 +94,10 @@ body{
 
 li {
 	padding : 5px;
-	border : 1px solid #555555;
-	margin-bottom : 5px;
+	border-bottom : 1px solid #555555;
+	margin-bottom : 3px;
 	border-radius : 10px;
+	font-weight : 700;
 }
 
 #nav-books {
