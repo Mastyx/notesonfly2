@@ -93,7 +93,7 @@ body{
 
 
 li {
-	padding : 5px;
+	padding : 3px;
 	border-bottom : 1px solid #555555;
 	margin-bottom : 3px;
 	border-radius : 10px;
@@ -200,12 +200,11 @@ li {
 	cursor : pointer;
 }
 #elemento-book:hover {
-	background: #559955;
+	border : 1px solid #555555;
 }
 
 #cancella-book {
-	padding : 5px;
-	border : 1px solid #555555;
+	padding : 3px;
 	border-radius : 5px;
 }
 #cancella-book:hover {
@@ -219,11 +218,10 @@ li {
 	cursor : pointer;
 }
 #elemento-nota:hover {
-	background: #559955;
+	border : 1px solid #555555;
 }
 #cancella-nota {
-	padding : 5px;
-	border : 1px solid #555555;
+	padding : 3px;
 	border-radius : 5px;
 }
 #cancella-nota:hover {

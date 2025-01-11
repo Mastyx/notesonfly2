@@ -59,6 +59,8 @@ const setQuillEditor = ()=> {
 			getLocalStorageUsage();
 		}
 	});
+
+	quill.disable();
 }
 
 
@@ -121,6 +123,7 @@ const updateNotebook = ()=> {
 			notaSelezionata.innerText = "Nessuna Nota Selezionata";
 			contenutoNota.value = "Nessun contenuto";
 			updateNote();
+			quill.setContents([{insert : '\n'}]);
 		});
 		const cancella = document.createElement("div");
 		cancella.innerHTML = "<i class='bx bxs-trash'></i>";
@@ -163,7 +166,7 @@ const updateNote = ()=> {
 			elemNota.appendChild(cancella);
 			elenco_ol_Note.appendChild(elemNota);
 		});
-	}
+	} else { quill.disable()}
 }
 
 
@@ -239,7 +242,6 @@ const exportLocalStorage = ()=> {
 	a.click();
 	URL.revokeObjectURL(url);
 }
-
 
 // intercetta il click sul div import 
 importBtn.addEventListener("click", ()=>{
