@@ -20,7 +20,6 @@ body{
 	height : 100%;
 	gap : 5px;
 	height : 100vh;
-
 }
 
 #option {
@@ -75,8 +74,6 @@ body{
     border-radius: 5px;
 }
 
-
-
 #add-book {
 	padding : 10px;
 	border-radius : 5px;
@@ -85,12 +82,10 @@ body{
 	justify-content: center;
 	cursor : pointer;
 	margin-bottom : 10px;
-
 }
 #add-book:hover {
 	background: #555555;
 }
-
 
 li {
 	padding : 3px;
@@ -152,7 +147,6 @@ li {
 	justify-content : left;
 	align-items : center;
 	border-radius : 5px;
-
 }
 
 #contenuto-nota {
@@ -162,7 +156,6 @@ li {
 	padding : 10px;
 	white-space: pre-wrap;
 	word-wrap : break-word;
-
 	overflow-wrap: break-word;
 	overflow-x : hidden;
 	overflow-y : auto;
@@ -173,10 +166,10 @@ li {
 
 }
 .container {
-	 display: flex;
-  flex-direction: column;
-  height: 100%; /* Occupa tutta l'altezza */
-  overflow: hidden; /* Evita l'overflow */
+	display: flex;
+	flex-direction: column;
+	height: 100%; /* Occupa tutta l'altezza */
+	overflow: hidden; /* Evita l'overflow */
 }
 
 .ql-editor {
@@ -191,7 +184,6 @@ li {
 	border : none !important;
 	border-bottom : 1px solid #CCCCCC !important;
 }
-
 
 #elemento-book{
 	display: flex;
@@ -227,7 +219,6 @@ li {
 #cancella-nota:hover {
 	background : #995555;
 }
-
 
 .selected {
 	background : linear-gradient(#282d40, #006A87);
