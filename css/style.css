@@ -87,12 +87,18 @@ body{
 	box-shadow: 0 0 2px inset #555555;
 	display : flex;
 	justify-content: center;
+	align-items : center;
 	cursor : pointer;
 	margin-bottom : 10px;
+	gap: 10px;
 }
 #add-book:hover {
 	background: #555555;
 }
+#add-book>i {
+	font-size : 20px;
+}
+
 
 li {
 	padding : 3px;
@@ -113,6 +119,7 @@ li {
 	align-items: center;
 	gap : 10px;
 }
+
 
 #notebook-selezionato {
 	display: flex;
@@ -138,15 +145,21 @@ li {
 #add-nota {
 	display: flex;
 	justify-content : center;
+	align-items : center;
 	padding : 10px;
 	border-radius : 5px;
 	box-shadow : 0 0 2px inset #555555;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	cursor: pointer;
+	gap: 10px;
+
 }
 #add-nota:hover {
 	background : #555555;
+}
+#add-nota>i {
+	font-size : 20px;
 }
 
 #container-notes {
