@@ -149,7 +149,7 @@ const updateNote = ()=> {
 				});
 				elemNota.classList.add("selected");
 				selectedNota = nota;
-				notaSelezionata.innerText = nota.titolo;
+				notaSelezionata.innerText = `${nota.titolo}`;
 				notebookSelezionato.innerText = selectedNotebook.titolo;
 				quill.enable( true );
 				quill.setContents( nota.testo || "" );
@@ -221,26 +221,26 @@ function getLocalStorageUsage() {
 
 //intercetta il click sul div export 
 exportBtn.addEventListener("click", ()=> {
-	// exportLocalStorage();
+	exportLocalStorage();
 });
-//const exportLocalStorage = ()=> {
-//	// scarica tutte i notebook e le note in un file json
-//	const fileName = prompt("Dai un nome al file (senza estensione) : ");
-//	if(!fileName) {
-//		alert("Salvataggio annullato, nome non fornito");
-//		return;
-//	}
-//
-//	const data = JSON.stringify(books, null, 2);
-//	const blob = new Blob([data], {type:"application/json"});
-//	
-//	const url = URL.createObjectURL(blob);
-//	const a = document.createElement("a");
-//	a.href = url;
-//	a.download = `${fileName}.json`;
-//	a.click();
-//	URL.revokeObjectURL(url);
-//}
+const exportLocalStorage = ()=> {
+	// scarica tutte i notebook e le note in un file json
+	const fileName = prompt("Dai un nome al file (senza estensione) : ");
+	if(!fileName) {
+		alert("Salvataggio annullato, nome non fornito");
+		return;
+	}
+
+	const data = JSON.stringify(books, null, 2);
+	const blob = new Blob([data], {type:"application/json"});
+	
+	const url = URL.createObjectURL(blob);
+	const a = document.createElement("a");
+	a.href = url;
+	a.download = `${fileName}.json`;
+	a.click();
+	URL.revokeObjectURL(url);
+}
 
 // intercetta il click sul div import 
 importBtn.addEventListener("click", ()=>{

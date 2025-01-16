@@ -9,7 +9,10 @@
 }
 
 .bxs-edit {
-	font-size: 30px;
+	font-size: 50px;
+}
+#nome-app {
+	font-weight : 700;
 }
 
 body{
@@ -42,7 +45,7 @@ body{
 	border-radius : 0 5px 5px 0;
 	height : 100vh;
 	border-left : none;
-	background: #282d40;
+	background: linear-gradient(#282d40 70%, #000000);
 	color : #CCCCCC;
 	padding : 5px;
 	overflow-y : auto;
@@ -73,11 +76,15 @@ body{
     background-color: #AA0000;
     border-radius: 5px;
 }
-
+#books {
+	height : 100%;
+	overflow : auto;
+	max-height : 100%;
+}
 #add-book {
 	padding : 10px;
 	border-radius : 5px;
-	box-shadow: 0 0 2px inset #000000;
+	box-shadow: 0 0 2px inset #555555;
 	display : flex;
 	justify-content: center;
 	cursor : pointer;
@@ -116,13 +123,24 @@ li {
 	border : 1px solid #555555;
 	border-radius : 5px;
 }
+#nav-notes {
+	display:flex;
+	flex-direction: column;
+	gap :20px;
+}
+
+#container-list-notes {
+	height: 100%;
+	overflow : auto;
+	max-height : 100%;
+}
 
 #add-nota {
 	display: flex;
 	justify-content : center;
 	padding : 10px;
 	border-radius : 5px;
-	box-shadow : 0 0 2px inset #000000;
+	box-shadow : 0 0 2px inset #555555;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	cursor: pointer;
