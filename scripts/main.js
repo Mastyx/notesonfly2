@@ -55,7 +55,8 @@ const setQuillEditor = ()=> {
 	quill.on("text-change", ()=> {
 		if(selectedNota) {
 			selectedNota.testo = quill.getContents();
-			localStorage.setItem("data-nof2", JSON.stringify(books));
+			console.log("cambiamento...");
+			salvaNotebooks();
 			getLocalStorageUsage();
 		}
 	});
@@ -170,13 +171,14 @@ const updateNote = ()=> {
 
 
 const salvaNotebooks = ()=> {
+	console.log("salvataggio i local");
 	localStorage.setItem("data-nof2", JSON.stringify(books));
 }
 
 const cancellaNotebook = (index)=> {
 	if( confirm("Il Book e tutto le note verranno cancellate !!! "))  {
 		books.splice(index, 1);
-		localStorage.setItem("data-nof2", JSON.stringify(books));
+		salvaNotebooks();		
 		location.reload();
 	}
 }
@@ -189,7 +191,7 @@ const cancellaNota = (index)=> {
 			updateNote();
 			notebookSelezionato.innerText = " - - - ";
 			notaSelezionata.innerText = " - - - ";
-			localStorage.setItem("data-nof2", JSON.stringify(books));
+			salvaNotebooks();
 		}
 	}
 }

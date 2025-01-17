@@ -8,12 +8,17 @@
 	color : #CCCCCC;
 }
 
+#nome-app {
+	font-weight : 700;
+	border : 1px solid #555555;
+	padding : 10px;
+	border-radius : 20px;
+	box-shadow : 0 0 10px inset #000000;
+}
 .bxs-edit {
 	font-size: 50px;
 }
-#nome-app {
-	font-weight : 700;
-}
+
 
 body{
 	background : #000000;
@@ -68,12 +73,10 @@ body{
 }
 
 #storage-usage-bar::-webkit-progress-value {
-    background-color: #AA0000;
     border-radius: 5px;
 }
 
 #storage-usage-bar::-moz-progress-bar {
-    background-color: #AA0000;
     border-radius: 5px;
 }
 #books {
