@@ -44,6 +44,12 @@ const setQuillEditor = ()=> {
 		},
 	});
 
+	// Sovrascrivi l'evento di incolla per accettare solo testo semplice
+	const clipboard = quill.getModule('clipboard');
+	clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
+		return new Delta().insert(node.innerText); // Incolla solo il testo semplice
+	});
+
 	// Imposta altezza fissa e overflow per l'editor
   const editorContainer = document.querySelector(".ql-editor");
   editorContainer.style.height = "100%";
