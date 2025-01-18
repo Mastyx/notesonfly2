@@ -20,6 +20,7 @@ let selectedNota = null;
 let quill ;
 // gestione al caricamento della pagina
 document.addEventListener("DOMContentLoaded", ()=> {
+	
 	hljs.configure({ languages: ["javascript", "python", "html", "css"] }); // Specifica i linguaggi supportati (opzionale)
   hljs.highlightAll(); // Inizializza highlight.js
 	setQuillEditor();
@@ -27,8 +28,13 @@ document.addEventListener("DOMContentLoaded", ()=> {
 	getLocalStorageUsage();
 });
 
+// dichiaro Delta per l'utilizzo della clipboard copia e incolla
+const Delta = Quill.import('delta');
 // settaggio del editor quill 
+
 const setQuillEditor = ()=> {
+	console.log("Veszione quill : ", Quill.version);
+
 	quill = new Quill("#contenuto-nota",{
 		theme : "snow",
 		modules : {
@@ -43,19 +49,18 @@ const setQuillEditor = ()=> {
 			],
 		},
 	});
-
 	// Sovrascrivi l'evento di incolla per accettare solo testo semplice
 	const clipboard = quill.getModule('clipboard');
 	clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
-		return new Delta().insert(node.innerText); // Incolla solo il testo semplice
+		const plainText = node.innerText || ''; // Estrai il testo semplice
+		return new Delta().insert(plainText);  // Usa Delta per incollare solo testo semplice
 	});
-
 	// Imposta altezza fissa e overflow per l'editor
-  const editorContainer = document.querySelector(".ql-editor");
-  editorContainer.style.height = "100%";
-  editorContainer.style.maxHeight = "100%";
-  editorContainer.style.overflowY = "auto";
-  editorContainer.style.overflowX = "hidden";
+	const editorContainer = document.querySelector(".ql-editor");
+	editorContainer.style.height = "100%";
+	editorContainer.style.maxHeight = "100%";
+	editorContainer.style.overflowY = "auto";
+	editorContainer.style.overflowX = "hidden";
 	
 	//intercettiamo i cambiamenti del testo per salvarli nel localstorage
 	quill.on("text-change", ()=> {
@@ -217,7 +222,7 @@ function getLocalStorageUsage() {
 	const usedPercentage = (usedSpace / MAX_LOCAL_STORAGE) * 100;
 	const progressBar = document.getElementById("storage-usage-bar");
 	if (usedPercentage > 80 ) {
-		progressBar.style.backgroundColor = "red";
+		progressBar.style.background = "blue";
 	} else {
 		progressBar.style.backgroundColor = "green";
 	}
