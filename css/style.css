@@ -242,6 +242,12 @@ li {
 	resize : none;
 	border-radius : 10px;
 	font-size : 18px;
+
+	background-color: #161824; /* Colore di base */
+  background-image: 
+    linear-gradient(90deg, rgba(50, 50, 50, 0.1) 1px, transparent 1px),
+    linear-gradient(rgba(50, 50 , 50, 0.1) 1px, transparent 1px);
+  background-size: 18px 18px; /* Dimensione dei quadretti */
 }
 .ql-snow {
 	border : none !important;
