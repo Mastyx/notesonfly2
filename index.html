@@ -24,7 +24,10 @@
 
 	<nav class="navbar" id="nav-books">
 		<p id="nome-app"><i class='bx bxs-edit'></i>Notes<br>on Fly</p>
-		<progress id="storage-usage-bar" value="0" max="100"></progress>
+		<div id="div-memory">
+			<p>Memoria disponibile</p>
+			<progress id="storage-usage-bar" value="-1" max="100"></progress>
+		</div>
 		<div id="option">
 			<div id="export">export</div>
 			<input type="file" id="file-export"
@@ -35,7 +38,6 @@
 						style="display:none;" 
 						accept="application/json">
 		</div>
-		<hr>
 		<p id="notebooks-area">Notebooks</p>
 		<div id="books">
 			<ol id="elenco-notebooks"></ol>
@@ -47,8 +49,7 @@
 
 
 	<nav class="navbar" id="nav-notes">
-		<div id="notebook-selezionato">notebook-selezionato</div>
-		<hr>
+		<div id="notebook-selezionato">notebook-selezionato</div>	
 		<p id="notes-area">Notes </p>
 		<div id="container-list-notes">
 			<ol id="elenco-note"></ol>
