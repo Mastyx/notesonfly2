@@ -64,11 +64,17 @@ const setQuillEditor = ()=> {
 	
 	//intercettiamo i cambiamenti del testo per salvarli nel localstorage
 	quill.on("text-change", ()=> {
-		if(selectedNota) {
-			selectedNota.testo = quill.getContents();
-			console.log("cambiamento...");
-			salvaNotebooks();
-			getLocalStorageUsage();
+		try {
+			if(selectedNota) {
+				selectedNota.testo = quill.getContents();
+				console.log("cambiamento...");
+				salvaNotebooks();
+				getLocalStorageUsage();
+			}
+		} catch (e) {
+			if (e instanceof DOMException && e.code ===22) {
+				alert("Attenzione Limite memori Raggiunto")
+			}
 		}
 	});
 
