@@ -210,7 +210,7 @@ const cancellaNota = (index)=> {
 
 function getLocalStorageUsage() {
 	// calcola la percentuale rimasta libera di 5MB  
-	const MAX_LOCAL_STORAGE = 5 * 1024 * 1024; // 5MB in bytes
+	const MAX_LOCAL_STORAGE = 10 * 1024 * 1024; // 5MB in bytes
 	let usedSpace = 0;
 
 	for (let key in localStorage) {
@@ -221,11 +221,14 @@ function getLocalStorageUsage() {
 
 	const usedPercentage = (usedSpace / MAX_LOCAL_STORAGE) * 100;
 	const progressBar = document.getElementById("storage-usage-bar");
-	if (usedPercentage > 80 ) {
-		progressBar.style.background = "blue";
-	} else {
-		progressBar.style.backgroundColor = "green";
-	}
+// Cambia il colore in base alla percentuale
+  if (usedPercentage <= 50) {
+    progressBar.style.setProperty("--progress-color", "#4caf50"); // Verde
+  } else if (usedPercentage <= 80) {
+    progressBar.style.setProperty("--progress-color", "#ff9800"); // Arancione
+  } else {
+    progressBar.style.setProperty("--progress-color", "#f44336"); // Rosso
+  }
 	progressBar.value = usedPercentage;
 
 	console.log(`Spazio usato: ${usedSpace} bytes (${usedPercentage.toFixed(2)}%)`);
