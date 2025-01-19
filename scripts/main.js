@@ -12,11 +12,11 @@ const contenutoNota = document.getElementById("contenuto-nota");
 const exportBtn = document.getElementById("export");
 const importBtn = document.getElementById("import")
 const fileInput = document.getElementById("file-import");
+const resetAll = document.getElementById("reset-all");
 //variabili 
 let books = [];
 let selectedNotebook = null;
 let selectedNota = null;
-
 let quill ;
 // gestione al caricamento della pagina
 document.addEventListener("DOMContentLoaded", ()=> {
@@ -26,6 +26,16 @@ document.addEventListener("DOMContentLoaded", ()=> {
 	setQuillEditor();
 	inizializza();
 	getLocalStorageUsage();
+});
+
+
+resetAll.addEventListener("click", ()=>{
+
+	if(confirm("sicuro di voler cancellare tutto")) {
+		console.log("cancellato il contenuto di books");
+	} else {
+		console.log("cancellazione annullata ")
+	}
 });
 
 // dichiaro Delta per l'utilizzo della clipboard copia e incolla
