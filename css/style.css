@@ -62,13 +62,13 @@ body{
 	align-items : center;
 	gap:5px;
 }
-#import, #export {
+#import, #export, #reset-all{
 	border : 1px solid #555555;
 	border-radius : 5px;
 	padding : 5px;
 	cursor : pointer;
 }
-#import:hover, #export:hover {
+#import:hover, #export:hover, #reset-all:hover {
 	background : #555555;
 }
 .navbar {

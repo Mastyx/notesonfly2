@@ -29,10 +29,20 @@ document.addEventListener("DOMContentLoaded", ()=> {
 });
 
 
+// evento pressione su reset 
 resetAll.addEventListener("click", ()=>{
-
-	if(confirm("sicuro di voler cancellare tutto")) {
-		console.log("cancellato il contenuto di books");
+	if(confirm("Are you sure, you want to delete everything ?")) {
+		if ( confirm("Save data, before deleting ? ") ) {
+			exportLocalStorage();
+			console.log("data saved before reset !!!");
+			books=[];
+			salvaNotebooks();
+			location.reload()
+		} else {
+			books = [];
+			salvaNotebooks();
+			location.reload();
+		}
 	} else {
 		console.log("cancellazione annullata ")
 	}
@@ -87,7 +97,6 @@ const setQuillEditor = ()=> {
 			}
 		}
 	});
-
 	quill.disable();
 }
 
