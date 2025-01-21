@@ -46,6 +46,7 @@ body{
 	display : flex;
 	justify-content : center;
 	padding-top : 10px;
+	margin-bottom: 10px;
 }
 #notes-area {
 	border-top : 1px solid #555555;
@@ -112,6 +113,8 @@ progress::-moz-progress-bar {
 	height : 100%;
 	overflow : auto;
 	max-height : 100%;
+	background : rgba(40,45,64,0.3);
+	border-radius : 10px;
 }
 #add-book {
 	padding : 10px;
@@ -144,6 +147,7 @@ li {
 	display:flex;
 	flex-direction: column;
 	gap :20px;
+	
 }
 
 #nav-books>p {
