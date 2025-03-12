@@ -1,5 +1,7 @@
 import Nota from "./Nota.js";
 import Notebook from "./Notebook.js";
+import { initAuth } from "./saveondrive.js";
+
 
 
 const elenco_ol_Books = document.getElementById("elenco-notebooks");
@@ -317,5 +319,22 @@ fileInput.addEventListener("change", (event)=>{
 			};
 			reader.readAsText(file);
 	}
+});
+
+// Evento per il bottone di salvataggio su Google Drive
+const saveToDriveBtn = document.getElementById("save-in-drive");
+saveToDriveBtn.addEventListener("click", () => {
+    const fileName = prompt("Dai un nome al file su Google Drive (senza estensione):");
+    if (fileName) {
+        const data = JSON.stringify(books, null, 2); // Usa i dati che vuoi salvare
+        initAuth(); // Avvia l'autenticazione
+        setTimeout(() => {
+            if (accessToken) {
+                saveJsonToDrive(data, fileName);
+            } else {
+                alert("Errore: autenticazione non riuscita!");
+            }
+        }, 2000);
+    }
 });
 
