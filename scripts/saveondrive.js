@@ -94,4 +94,5 @@ function updateFile(fileId, jsonData) {
         alert("Errore nell'aggiornamento!");
     });
 }
+export { accessToken, saveJsonToDrive };
 
