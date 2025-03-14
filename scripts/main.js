@@ -323,18 +323,16 @@ fileInput.addEventListener("change", (event)=>{
 
 // Evento per il bottone di salvataggio su Google Drive
 const saveToDriveBtn = document.getElementById("save-in-drive");
-saveToDriveBtn.addEventListener("click", () => {
+saveToDriveBtn.addEventListener("click", async () => {
     const fileName = prompt("Dai un nome al file su Google Drive (senza estensione):");
     if (fileName) {
         const data = JSON.stringify(books, null, 2); // Usa i dati che vuoi salvare
-        initAuth(); // Avvia l'autenticazione
-        setTimeout(() => {
-            if (accessToken) {
-                saveJsonToDrive(data, fileName);
-            } else {
-                alert("Errore: autenticazione non riuscita!");
-            }
-        }, 2000);
+        try {
+            await initAuth(); // Aspetta che l'autenticazione sia completata
+            saveFileToDrive(fileName, data); // Salva il file su Google Drive
+        } catch (error) {
+            alert("Errore durante l'autenticazione: " + error);
+        }
     }
 });
 

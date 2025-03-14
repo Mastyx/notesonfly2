@@ -3,21 +3,28 @@ const SCOPES = "https://www.googleapis.com/auth/drive.file";
 let accessToken = "";
 
 export function initAuth() {
-    google.accounts.oauth2.initTokenClient({
-        client_id: CLIENT_ID,
-        scope: SCOPES,
-        callback: (response) => {
-            if (response.error) {
-                console.error("Errore autenticazione:", response);
-                alert("Errore autenticazione");
-                return;
+    return new Promise((resolve, reject) => {
+        const client = google.accounts.oauth2.initTokenClient({
+            client_id: CLIENT_ID,
+            scope: SCOPES,
+            callback: (response) => {
+                if (response.error) {
+                    console.error("Errore autenticazione:", response);
+                    alert("Errore autenticazione");
+                    reject("Errore autenticazione");
+                    return;
+                }
+                accessToken = response.access_token;
+                console.log("Access Token:", accessToken);
+                alert("Accesso effettuato!");
+                resolve();
             }
-            accessToken = response.access_token;
-            console.log("Access Token:", accessToken);
-            alert("Accesso effettuato!");
-        }
-    }).requestAccessToken();
+        });
+
+        client.requestAccessToken();
+    });
 }
+
 
 function saveJsonToDrive(jsonData, fileName) {
     if (!accessToken) {
