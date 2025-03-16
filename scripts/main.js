@@ -1,8 +1,8 @@
 import Nota from "./Nota.js";
 import Notebook from "./Notebook.js";
-import {accessToken, initAuth, saveJsonToDrive } from "./saveondrive.js";
+import { initAuth, saveJsonToDrive } from "./saveondrive.js";
 
-
+// porca puttana 
 
 const elenco_ol_Books = document.getElementById("elenco-notebooks");
 const elenco_ol_Note = document.getElementById("elenco-note");
@@ -321,18 +321,24 @@ fileInput.addEventListener("change", (event)=>{
 	}
 });
 
-// Evento per il bottone di salvataggio su Google Drive
-const saveToDriveBtn = document.getElementById("save-in-drive");
-saveToDriveBtn.addEventListener("click", async () => {
+
+
+
+document.getElementById("connect-drive").addEventListener("click", () => {
+    initAuth(); // Attiva solo l'autenticazione e cambia il colore del pulsante
+});
+
+document.getElementById("save-in-drive").addEventListener("click", () => {
+    if (!accessToken) {
+        alert("Devi prima collegarti a Google Drive!");
+        return;
+    }
+
     const fileName = prompt("Dai un nome al file su Google Drive (senza estensione):");
     if (fileName) {
-        const data = JSON.stringify(books, null, 2); // Usa i dati che vuoi salvare
-        try {
-            await initAuth(); // Aspetta che l'autenticazione sia completata
-            saveFileToDrive(fileName, data); // Salva il file su Google Drive
-        } catch (error) {
-            alert("Errore durante l'autenticazione: " + error);
-        }
+        const data = JSON.stringify(books, null, 2);
+        saveJsonToDrive(data, fileName);
     }
 });
+
 

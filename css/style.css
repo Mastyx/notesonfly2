@@ -73,7 +73,9 @@ body{
 #import:hover, #export:hover, #reset-all:hover {
 	background : #555555;
 }
-
+#connect-drive {
+	font-size : 30px;	
+}
 #save-in-drive {
 	padding : 10px;
 	display : flex;

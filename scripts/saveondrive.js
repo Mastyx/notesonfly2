@@ -1,34 +1,40 @@
 const CLIENT_ID = "386225138212-pr7juka0pdvo3jcd7770tiomojgeehkd.apps.googleusercontent.com";
 const SCOPES = "https://www.googleapis.com/auth/drive.file";
 let accessToken = "";
+let authClient = null;
 
 export function initAuth() {
-    return new Promise((resolve, reject) => {
-        const client = google.accounts.oauth2.initTokenClient({
+    if (!authClient) {
+        authClient = google.accounts.oauth2.initTokenClient({
             client_id: CLIENT_ID,
             scope: SCOPES,
             callback: (response) => {
                 if (response.error) {
                     console.error("Errore autenticazione:", response);
                     alert("Errore autenticazione");
-                    reject("Errore autenticazione");
                     return;
                 }
                 accessToken = response.access_token;
                 console.log("Access Token:", accessToken);
-                alert("Accesso effettuato!");
-                resolve();
+
+                // Cambia colore del pulsante di autenticazione
+                const connectButton = document.getElementById("connect-drive");
+                if (connectButton) {
+                    connectButton.style.backgroundColor = "green";
+                    connectButton.innerText = "Collegato a Drive";
+                }
+
+                alert("Autenticazione completata!");
             }
         });
+    }
 
-        client.requestAccessToken();
-    });
+    authClient.requestAccessToken();
 }
 
-
-function saveJsonToDrive(jsonData, fileName) {
+export function saveJsonToDrive(jsonData, fileName) {
     if (!accessToken) {
-        alert("Devi prima autenticarti!");
+        alert("Devi prima collegarti a Google Drive!");
         return;
     }
 
@@ -101,5 +107,4 @@ function updateFile(fileId, jsonData) {
         alert("Errore nell'aggiornamento!");
     });
 }
-export { accessToken, saveJsonToDrive };
 
