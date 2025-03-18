@@ -334,7 +334,7 @@ document.getElementById("save-in-drive").addEventListener("click", () => {
         return;
     }
 
-    const fileName = prompt("Dai un nome al file su Google Drive (senza estensione):");
+    let fileName = prompt("Dai un nome al file su Google Drive (senza estensione):");
     if (fileName) {
 			  if (!fileName.endsWith(".json")) {
             fileName += ".json"; // Aggiungiamo l'estensione se manca
