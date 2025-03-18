@@ -1,6 +1,6 @@
 import Nota from "./Nota.js";
 import Notebook from "./Notebook.js";
-import { initAuth, saveJsonToDrive } from "./saveondrive.js";
+import { initAuth, saveJsonToDrive, isAuthenticated } from "./saveondrive.js";
 
 // porca puttana 
 
@@ -329,13 +329,16 @@ document.getElementById("connect-drive").addEventListener("click", () => {
 });
 
 document.getElementById("save-in-drive").addEventListener("click", () => {
-    if (!accessToken) {
+    if (!isAuthenticated()) {
         alert("Devi prima collegarti a Google Drive!");
         return;
     }
 
     const fileName = prompt("Dai un nome al file su Google Drive (senza estensione):");
     if (fileName) {
+			  if (!fileName.endsWith(".json")) {
+            fileName += ".json"; // Aggiungiamo l'estensione se manca
+        }
         const data = JSON.stringify(books, null, 2);
         saveJsonToDrive(data, fileName);
     }

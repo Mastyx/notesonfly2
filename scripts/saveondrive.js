@@ -32,6 +32,11 @@ export function initAuth() {
     authClient.requestAccessToken();
 }
 
+// Funzione per verificare se l'utente è autenticato
+export function isAuthenticated() {
+    return accessToken !== "";
+}
+
 export function saveJsonToDrive(jsonData, fileName) {
     if (!accessToken) {
         alert("Devi prima collegarti a Google Drive!");
