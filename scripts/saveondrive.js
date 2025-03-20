@@ -20,8 +20,9 @@ export function initAuth() {
                 // Cambia colore del pulsante di autenticazione
                 const connectButton = document.getElementById("connect-drive");
                 if (connectButton) {
-                    connectButton.style.backgroundColor = "green";
+                    connectButton.style.backgroundColor = "#006A87";
                     connectButton.innerText = "Collegato a Drive";
+					connectButton.style.fontSize = "1rem";
                 }
 
                 alert("Autenticazione completata!");

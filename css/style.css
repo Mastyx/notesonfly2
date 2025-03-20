@@ -73,8 +73,21 @@ body{
 #import:hover, #export:hover, #reset-all:hover {
 	background : #555555;
 }
+
+#google-container {
+	display : flex;
+	align-items : center;
+	justify-content : center;
+	gap: 5px;
+}
 #connect-drive {
-	font-size : 30px;	
+	display: flex;
+	font-size : 30px;
+	border-radius : 5px;
+	border: 1px solid #555555;
+	padding : 10px;
+	justify-content : center;
+
 }
 #save-in-drive {
 	padding : 10px;
